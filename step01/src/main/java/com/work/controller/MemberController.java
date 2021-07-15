@@ -68,10 +68,20 @@ public class MemberController {
 //	}
 
 	@RequestMapping("/join")
-	public String join(Member dto) {
+	public String join(Member dto, Model model) {
 		System.out.println("join 요청");
 		System.out.println(dto);
-		return null;		
+		int row = memberService.getSize();
+		
+		memberService.join(dto.getMemberId(), dto.getMemberPw(), dto.getName(), dto.getMobile(), dto.getEmail());
+		System.out.println(dto);
+		
+		if(memberService.getSize() > row) {
+			model.addAttribute("message", "[join user] :: " + dto.getMemberId());
+		} else {
+			model.addAttribute("message", "[join user fail] 회원가입 실패");
+		}
+		return "loginForm";		
 	}
 
 //	@RequestMapping("/member/size")

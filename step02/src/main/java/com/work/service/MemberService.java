@@ -8,7 +8,7 @@ import com.work.dto.Member;
 import com.work.util.Utility;
 
 @Service
-public class Memberservice {
+public class MemberService {
 	
 	// ArrayList<Member> 멤버변수 선언 및 생성 : 회원들의 자료 저장구조 
 	ArrayList<Member> list = new ArrayList<Member>();
@@ -16,7 +16,7 @@ public class Memberservice {
 	// initMember() 메서드에서 3명의 회원 등록 구현 
 	
 	
-	public Memberservice() {
+	public MemberService() {
 		initMember();
 		System.out.println("MemberService() constructor loading");
 	}
@@ -48,10 +48,15 @@ public class Memberservice {
 	public Member join(String memberId, String memberPw, String name, String mobile, String email) {
 		
 		Member dto = Member.builder().memberId(memberId).memberPw(memberPw).name(name).mobile(mobile).email(email).entryDate(Utility.getCurrentDate()).grade("G").mileage(1000).manager(null).build();
-		
+		System.out.println(dto);
 		list.add(dto);
 		
 		return dto;
+	}
+	
+	public ArrayList<Member> allList() {
+		System.out.println(list);
+		return list;
 	}
 	
 	
