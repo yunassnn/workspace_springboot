@@ -22,5 +22,10 @@ public interface MemberDao {
 	/** join */
 	public int insertMember(Member dto);
 	
+	/** update member info */
+	public boolean updateMember(String memberId, String memberPw, String name, String mobile, String email);
+	
+	/** delete member */
+	public boolean deleteMember(String memberId);
 	
 }

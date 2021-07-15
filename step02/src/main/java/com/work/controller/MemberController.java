@@ -36,33 +36,19 @@ public class MemberController {
 	
 
 	@RequestMapping("/join")
-	public String join(String memberId, String memberPw, String name, String mobile, String email, Model model) {
+	public String join(Member dto, Model model) {
 		System.out.println("join 요청");
-		System.out.println(memberId + ", " + memberPw + ", " + name + ", " + mobile + ", " + email);
-		int row = memberService.getSize();
+		System.out.println("service 이전 :: " + dto);		
+		int result = memberService.addMember(dto);
+		System.out.println("service 이후 :: " + dto);
 		
-		Member dto = memberService.join(memberId, memberPw, name, mobile, email);
-		
-		System.out.println(dto);
-		
-		if(memberService.getSize() > row) {
-			model.addAttribute("message", "[join user] :: " + dto.getMemberId());
+		if(result == 1) {
+			model.addAttribute("message", "[join user] :: ");
+			return "loginForm";
 		} else {
-			model.addAttribute("message", "[join user fail] 회원가입 실패");
+			model.addAttribute("message", "[join user] :: FAIL ");
+			return "result";
 		}
-		return "loginForm";		
-	}
-	
-	@GetMapping("/member/size")
-	@ResponseBody
-	public int size() {
-		return memberService.getSize();
-	}
-	
-	@RequestMapping("/allList")
-	@ResponseBody
-	public ArrayList<Member> all() {
-		return memberService.allList();
 	}
 	
 	@RequestMapping("/login")
@@ -81,16 +67,5 @@ public class MemberController {
 		return "result";
 	}
 
-	@RequestMapping("/login/param")
-	public String loginMap(@RequestParam(value = "id") String memberId, @RequestParam(value = "pw") String memberPw) {
-		System.out.println(memberId + ", " + memberPw);
-		return null;
-	}
-
-	@RequestMapping("/login/null")
-	public String loginNull(@RequestParam(required = true, defaultValue = "user01") String memberId, @RequestParam(required = true, defaultValue = "password01") String memberPw) {
-		System.out.println(memberId + ", " + memberPw);
-		return "main";
-	}
 	
 }
