@@ -18,7 +18,7 @@
 <h3>회원가입페이지</h3>
 <form action="join" method="post">
 	<input type="text" name="memberId" autofocus="autofocus" required="required"/>
-	<input type="password" name="memberPW" required="required" />
+	<input type="password" name="memberPw" required="required" />
 	<input type="text" name="name" required="required"/>
 	<input type="text" name="mobile" required="required" />
 	<input type="text" name="email" required="required"/>
